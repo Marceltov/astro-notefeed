@@ -6,10 +6,10 @@ It reads feeds through their read links (`https://notefeed.me/r/<read id>`), so 
 
 ## Install
 
-Not on npm; install a tag from GitHub:
+Not on npm; install a tag's archive from GitHub (no git or SSH key needed in CI, and the lockfile pins its hash):
 
 ```sh
-npm install github:Marceltov/astro-notefeed#v0.1.0
+npm install https://github.com/Marceltov/astro-notefeed/archive/refs/tags/v0.1.0.tar.gz
 ```
 
 ## Use
