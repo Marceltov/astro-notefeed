@@ -1,0 +1,40 @@
+{
+  "name": "astro-notefeed",
+  "version": "0.1.0",
+  "description": "An Astro content loader for public notefeed feeds, with picture galleries and a lightbox.",
+  "license": "Apache-2.0",
+  "author": "Marcel Bruckner",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "default": "./src/index.js"
+    },
+    "./lightbox": {
+      "types": "./src/lightbox.d.ts",
+      "default": "./src/lightbox.js"
+    },
+    "./gallery.css": "./src/gallery.css"
+  },
+  "files": [
+    "src"
+  ],
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "peerDependencies": {
+    "astro": ">=5"
+  },
+  "scripts": {
+    "test": "node --test",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "prettier": "^3.10.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Marceltov/astro-notefeed.git"
+  }
+}

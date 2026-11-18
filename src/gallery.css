@@ -1,0 +1,161 @@
+/* The figures of ./gallery.js and the dialog of ./lightbox.js. A site sets its look with these: */
+:root {
+  --nf-gap: 8px; /* between the pictures of a gallery */
+  --nf-radius: 0; /* of each picture */
+  --nf-border: none; /* around each picture */
+  --nf-caption: inherit; /* the caption's colour */
+  --nf-caption-size: 0.85em;
+  --nf-lightbox-backdrop: rgb(10 10 10 / 0.92);
+  --nf-lightbox-ink: #f4f4f4;
+}
+
+.nf-figure {
+  margin-block: 2em;
+}
+.nf-items {
+  display: grid;
+  gap: var(--nf-gap);
+}
+.nf-item {
+  display: block;
+  overflow: hidden;
+  border-radius: var(--nf-radius);
+  border: var(--nf-border);
+  cursor: zoom-in;
+}
+.nf-item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  border: 0;
+  max-height: none;
+  transition: transform 0.25s ease;
+}
+.nf-item:hover img {
+  transform: scale(1.02);
+}
+@media (prefers-reduced-motion: reduce) {
+  .nf-item img {
+    transition: none;
+  }
+  .nf-item:hover img {
+    transform: none;
+  }
+}
+
+/* One picture: whole, never taller than most of the screen. */
+.nf-figure[data-count="1"] .nf-item {
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+}
+.nf-figure[data-count="1"] .nf-item img {
+  width: auto;
+  max-width: 100%;
+  max-height: min(75vh, 44rem);
+  height: auto;
+}
+
+/* Several: evenly cropped tiles, two or three to a row; the first of three or five is large. */
+.nf-gallery .nf-items {
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: clamp(140px, 22vw, 260px);
+}
+.nf-gallery .nf-item img {
+  object-fit: cover;
+}
+.nf-gallery[data-count="3"] .nf-item:first-child,
+.nf-gallery[data-count="5"] .nf-item:first-child {
+  grid-row: span 2;
+}
+@media (min-width: 640px) {
+  .nf-gallery:not([data-count="2"], [data-count="3"], [data-count="4"]) .nf-items {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.nf-figure figcaption {
+  margin-top: 0.7em;
+  text-align: center;
+  font-size: var(--nf-caption-size);
+  color: var(--nf-caption);
+  text-wrap: balance;
+}
+
+.nf-lightbox {
+  width: 100vw;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--nf-lightbox-ink);
+  touch-action: pan-y;
+}
+.nf-lightbox[open] {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  place-items: center;
+}
+.nf-lightbox::backdrop {
+  background: var(--nf-lightbox-backdrop);
+}
+.nf-lightbox img {
+  max-width: calc(100vw - 32px);
+  max-height: calc(100dvh - 110px);
+  object-fit: contain;
+  align-self: end;
+}
+.nf-lightbox-text {
+  max-width: 60ch;
+  padding: 14px 16px 24px;
+  text-align: center;
+  font-size: 15px;
+  line-height: 1.45;
+}
+.nf-lightbox-count {
+  opacity: 0.65;
+  white-space: nowrap;
+}
+.nf-lightbox button {
+  position: fixed;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 0;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.12);
+  color: inherit;
+  font:
+    32px/1 system-ui,
+    sans-serif;
+  cursor: pointer;
+}
+.nf-lightbox button[hidden] {
+  display: none;
+}
+.nf-lightbox button:hover {
+  background: rgb(255 255 255 / 0.24);
+}
+.nf-lightbox button:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+.nf-lightbox-close {
+  top: 12px;
+  right: 12px;
+}
+.nf-lightbox-prev,
+.nf-lightbox-next {
+  top: calc(50% - 24px);
+}
+.nf-lightbox-prev {
+  left: 12px;
+}
+.nf-lightbox-next {
+  right: 12px;
+}
