@@ -53,7 +53,7 @@
 .nf-figure[data-count="1"] .nf-item img {
   width: auto;
   max-width: 100%;
-  max-height: min(75vh, 44rem);
+  max-height: min(70vh, 36rem);
   height: auto;
 }
 
@@ -65,12 +65,51 @@
 .nf-gallery .nf-item img {
   object-fit: cover;
 }
-.nf-gallery[data-count="3"] .nf-item:first-child,
-.nf-gallery[data-count="5"] .nf-item:first-child {
+.nf-gallery[data-count="3"] > .nf-items > .nf-item:first-child,
+.nf-gallery[data-count="5"] > .nf-items > .nf-item:first-child {
   grid-row: span 2;
 }
 @media (min-width: 640px) {
   .nf-gallery:not([data-count="2"], [data-count="3"], [data-count="4"]) .nf-items {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Several groups, each with its own caption: tiles of one size, the caption under its picture. */
+.nf-captioned .nf-items {
+  grid-auto-rows: auto;
+  align-items: start;
+}
+.nf-cell {
+  margin: 0;
+}
+.nf-captioned .nf-item {
+  aspect-ratio: 4 / 3;
+}
+.nf-captioned .nf-cell figcaption {
+  margin-top: 0.5em;
+  text-align: left;
+}
+/* On a phone: a strip to swipe through, the next picture peeking in. */
+@media (max-width: 479px) {
+  .nf-captioned .nf-items {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: 82%;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+  .nf-captioned .nf-items::-webkit-scrollbar {
+    display: none;
+  }
+  .nf-captioned .nf-cell {
+    scroll-snap-align: start;
+  }
+}
+@media (min-width: 640px) {
+  .nf-captioned[data-count="3"] .nf-items {
     grid-template-columns: repeat(3, 1fr);
   }
 }

@@ -56,3 +56,20 @@ test("the heading notefeed took the title from leaves the body; another heading 
   assert.equal(withoutTitle("# Anderes\n\nText", "Neu hier"), "# Anderes\n\nText");
   assert.equal(withoutTitle("Text\n# Neu hier", "Neu hier"), "Text\n# Neu hier");
 });
+
+test("picture groups with their own captions and nothing between them become one gallery, each caption under its picture", () => {
+  const out = galleries(`<p>${img(1)}</p>\n<p><em>Eins.</em></p>\n<p>${img(2)}</p>\n<p><em>Zwei.</em></p>\n<p>${img(3)}</p>\n<p>Text</p>`);
+  assert.match(out, /^<figure class="nf-figure nf-gallery nf-captioned" data-count="3">/);
+  assert.equal((out.match(/<figure class="nf-cell">/g) ?? []).length, 3);
+  assert.match(
+    out,
+    /1\.jpg" alt="Bild 1"><\/a><figcaption>Eins\.<\/figcaption><\/figure><figure class="nf-cell"><a class="nf-item" href="https:\/\/x\/2\.jpg"/,
+  );
+  assert.match(out, /3\.jpg" alt="Bild 3"><\/a><\/figure><\/div><\/figure>\n<p>Text<\/p>$/);
+});
+
+test("text between pictures keeps them apart", () => {
+  const out = galleries(`<p>${img(1)}</p>\n<p><em>Eins.</em></p>\n<p>Text</p>\n<p>${img(2)}</p>`);
+  assert.equal((out.match(/<figure class="nf-figure"/g) ?? []).length, 2);
+  assert.ok(!out.includes("nf-captioned"));
+});

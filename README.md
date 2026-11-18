@@ -9,7 +9,7 @@ It reads feeds through their read links (`https://notefeed.me/r/<read id>`), so 
 Not on npm; install a tag's archive from GitHub (no git or SSH key needed in CI, and the lockfile pins its hash):
 
 ```sh
-npm install https://github.com/Marceltov/astro-notefeed/archive/refs/tags/v0.1.0.tar.gz
+npm install https://github.com/Marceltov/astro-notefeed/archive/refs/tags/v0.2.0.tar.gz
 ```
 
 ## Use
@@ -56,7 +56,7 @@ import "astro-notefeed/gallery.css";
 - **Title**: the note's. The heading notefeed took it from is dropped from the body, since the page shows the title.
 - **Tags**: `lang:<code>` sets the entry's language (default: the `lang` option, `en` if left out); `slug:<slug>` fixes its id (default: from the title, umlauts spelled out, up to the first colon). Neither is in `tags`. A clash of ids gets the note id's end appended.
 - **summary**: the first paragraph as plain text, at most about 220 characters. **image**: the first picture, for a teaser.
-- **Pictures**: relative links point at the feed's read page. A paragraph that holds only pictures, and every such paragraph right after it, become one `<figure class="nf-figure">`: one picture stays whole, two or more become a grid of evenly cropped tiles (`nf-gallery`, `data-count`). An emphasised paragraph right after them (`*So sieht es aus.*`) becomes the caption. Each picture links to its file, so it opens without JavaScript too.
+- **Pictures**: relative links point at the feed's read page. A paragraph that holds only pictures, and every such paragraph right after it, become one `<figure class="nf-figure">`: one picture stays whole, two or more become a grid of evenly cropped tiles (`nf-gallery`, `data-count`). An emphasised paragraph right after them (`*So sieht es aus.*`) becomes the caption. Groups of pictures with nothing but their captions between them make one gallery too (`nf-captioned`): tiles of one size, each caption under its picture, a strip to swipe through on phones. Each picture links to its file, so it opens without JavaScript too.
 
 ## Styling
 
