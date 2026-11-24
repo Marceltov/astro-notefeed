@@ -136,8 +136,9 @@
 }
 .nf-lightbox[open] {
   display: grid;
-  grid-template-rows: 1fr auto;
-  place-items: center;
+  grid-template-rows: auto auto;
+  align-content: center;
+  justify-items: center;
 }
 .nf-lightbox::backdrop {
   background: var(--nf-lightbox-backdrop);
@@ -146,7 +147,6 @@
   max-width: calc(100vw - 32px);
   max-height: calc(100dvh - 110px);
   object-fit: contain;
-  align-self: end;
 }
 .nf-lightbox-text {
   max-width: 60ch;
