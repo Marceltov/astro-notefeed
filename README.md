@@ -9,7 +9,7 @@ It reads feeds through their read links (`https://notefeed.me/r/<read id>`), so 
 Not on npm; install a tag's archive from GitHub (no git or SSH key needed in CI, and the lockfile pins its hash):
 
 ```sh
-npm install https://github.com/Marceltov/astro-notefeed/archive/refs/tags/v0.2.0.tar.gz
+npm install https://github.com/Marceltov/astro-notefeed/archive/refs/tags/v0.2.1.tar.gz
 ```
 
 ## Use
